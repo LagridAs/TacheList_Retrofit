@@ -1,0 +1,2 @@
+rootProject.name='TacheList_Retrofit'
+include ':app'
