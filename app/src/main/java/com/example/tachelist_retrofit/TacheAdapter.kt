@@ -29,13 +29,16 @@ class TacheAdapter(private val dataList: MutableList<ToDo>): RecyclerView.Adapte
     ){
         private var tacheTx:TextView?= null
         private var tacheChk:CheckBox?=null
+        private var tacheNum:TextView?=null
 
         init {
             tacheTx=itemView.findViewById(R.id.todoText)
             tacheChk=itemView.findViewById(R.id.todoCheck)
+            tacheNum=itemView.findViewById(R.id.NumText)
         }
 
         fun bind(todo: ToDo){
+            tacheNum?.text= "Task N ".plus(todo.id.toString())
             tacheTx?.text=todo.title
             if(todo.completed){
                 tacheChk?.isChecked= true

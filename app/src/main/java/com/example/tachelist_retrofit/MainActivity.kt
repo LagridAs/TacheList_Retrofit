@@ -18,39 +18,17 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MainActivity : AppCompatActivity() {
 
 
-    lateinit var adapterTodo:TacheAdapter
+    private lateinit var adapterTodo:TacheAdapter
     lateinit var linearLayoutManager: LinearLayoutManager
-    lateinit var todoList: MutableList<ToDo>
+    private var todoList: MutableList<ToDo> = mutableListOf()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-        val service = RetrofitFactory.makeRetrofitService()
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = service.getToDoList()
-            withContext(Dispatchers.Main) {
-                try {
-                    if (response != null) {
-                        if (response.isSuccessful) {
-                            todoList= response.body() as MutableList<ToDo>
-                            afficheList(todoList)                        } else {
-                            Log.d(ContentValues.TAG,"Error: ${response.code()}")
-                        }
-                    }
-                    else{
-                        Log.d(ContentValues.TAG,"Error to get TODO list")
-
-                    }
-                } catch (e: HttpException) {
-                    Log.d(ContentValues.TAG,"Exception ${e.message}")
-                } catch (e: Throwable) {
-                    Log.d(ContentValues.TAG,"Ooops: Something else went wrong")
-                }
-            }
-        }
+        initTodoList()
+        afficheList()
 
 
         /*val retrofit = Retrofit.Builder()
@@ -75,14 +53,42 @@ class MainActivity : AppCompatActivity() {
             }
         })*/
     }
-    fun afficheList(todoList:MutableList<ToDo>){
+
+    fun initTodoList(){
+
+        val service = RetrofitFactory.makeRetrofitService()
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = service.getToDoList()
+            withContext(Dispatchers.Main) {
+                try {
+                    if (response != null) {
+                        if (response.isSuccessful) {
+                            val list = response.body() as MutableList<ToDo>
+                            todoList.addAll(list)
+                            adapterTodo.notifyDataSetChanged()
+                        }
+                        else {
+                            Log.d(ContentValues.TAG,"Error: ${response.code()}")
+                        }
+                    }
+                    else{
+                        Log.d(ContentValues.TAG,"Error to get TODO list")
+
+                    }
+                } catch (e: HttpException) {
+                    Log.d(ContentValues.TAG,"Exception ${e.message}")
+                } catch (e: Throwable) {
+                    Log.d(ContentValues.TAG,"Ooops: Something else went wrong")
+                }
+            }
+        }
+    }
+    fun afficheList(){
         adapterTodo= TacheAdapter(todoList)
         linearLayoutManager = LinearLayoutManager(this@MainActivity)
         myRecyclerView.apply {
             layoutManager= linearLayoutManager
             adapter=adapterTodo
         }
-
-
     }
 }

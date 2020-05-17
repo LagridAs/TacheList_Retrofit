@@ -10,34 +10,58 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="100dp">
 
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="16dp"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_laptop"
+            android:src="@drawable/ic_todo"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintHorizontal_bias="0.042"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
-            card_view:layout_constraintVertical_bias="0.533" />
+            card_view:layout_constraintVertical_bias="0.16" />
+
+        <TextView
+            android:id="@+id/NumText"
+            style="@style/TextAppearance.AppCompat.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="16dp"
+            android:text="Task Num"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.069"
+            card_view:layout_constraintStart_toEndOf="@+id/imageView"
+            card_view:layout_constraintTop_toTopOf="parent"
+            card_view:layout_constraintVertical_bias="0.14" />
 
         <TextView
             android:id="@+id/todoText"
-            style="@style/TextAppearance.AppCompat.Large"
-            android:layout_width="wrap_content"
+            style="@style/TextAppearance.AppCompat.Small"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="16dp"
             android:text="u have work to do"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintHorizontal_bias="0.09"
-            card_view:layout_constraintStart_toEndOf="@+id/imageView"
-            card_view:layout_constraintTop_toTopOf="parent"
-            card_view:layout_constraintVertical_bias="0.533" />
+            card_view:layout_constraintHorizontal_bias="0.0"
+            card_view:layout_constraintStart_toStartOf="@+id/NumText"
+            card_view:layout_constraintTop_toBottomOf="@+id/NumText"
+            card_view:layout_constraintVertical_bias="0.0" />
 
         <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/todoCheck"
@@ -45,10 +69,10 @@
             android:layout_height="wrap_content"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintHorizontal_bias="0.884"
-            card_view:layout_constraintStart_toEndOf="@+id/todoText"
+            card_view:layout_constraintHorizontal_bias="0.93"
+            card_view:layout_constraintStart_toEndOf="@+id/NumText"
             card_view:layout_constraintTop_toTopOf="parent"
-            card_view:layout_constraintVertical_bias="0.428" />
+            card_view:layout_constraintVertical_bias="0.161" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
